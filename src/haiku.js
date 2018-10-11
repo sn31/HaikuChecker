@@ -170,26 +170,44 @@ export class Haiku {
       }
     }
   }
+  //spec 3
+  splitConsonantSurroudedByVowels(
+    word //it does not matter if the vowels have long or short sound for the purpose of this program.
+  ) {
+    let newWord = word;
+    for (let i = 1; i < word.length - 1; i++) {
+      if (
+        !vowelsList.includes(word[i]) &&
+        vowelsList.includes(word[i - 1]) &&
+        vowelsList.includes(word[i + 1])
+      ) {
+        //check to see if consonant is surrounded by vowels
+        word.replace(
+          word.substring(i - 1, i + 2),
+          word[i - 1] + "-" + word.substring(i, i + 2)
+        );
+      }
+      return newWord;
+    }
+  }
+  //spec 4
   splitBeforeCkle(word) {
     let newWord = word;
-    if (word.endsWith("ckle"))
-    {
+    if (word.endsWith("ckle")) {
       word.replace("ckle", "ck-le");
     }
     return newWord;
   }
+
+  //spec 5
   splitBeforeLe(word) {
-    let syllableCount = 0;
     let newWord = word;
-    if (word.endsWith("le") && !vowelsList.includes(word[word.length-3]))
-    {
-      word.replace(word.substring(word.length-3), "-" + word.substring(word.length-3));
-      return newWord;
+    if (word.endsWith("le") && !vowelsList.includes(word[word.length - 3])) {
+      word.replace(
+        word.substring(word.length - 3),
+        "-" + word.substring(word.length - 3)
+      );
     }
-    else //treat the whole word as a single syllable
-    {
-      syllableCount++;
-      return syllableCount;
-    }
+    return newWord;
   }
 }
